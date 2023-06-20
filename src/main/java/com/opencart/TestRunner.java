@@ -3,6 +3,9 @@ package com.opencart;
 import com.opencart.Managers.DataFakerManager;
 import com.opencart.Managers.DriverManager;
 import com.opencart.Managers.ScrollManager;
+import com.opencart.Pageobjects.AccountCreatedPage;
+import com.opencart.Pageobjects.HomePage;
+import com.opencart.Pageobjects.RegisterPage;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -15,62 +18,35 @@ public class TestRunner {
 
         driver.get("https://andreisecuqa.host/");
 
-        String currentWindowName = driver.getWindowHandle();
+        HomePage homePage = new HomePage(driver);
+        homePage.navigateToRegisterPageFromHeaderMenu();
 
-        driver.switchTo().newWindow(WindowType.TAB);
-
-        driver.get("https://andreisecuqa.host/");
-
-        WebElement accountIcon = driver.findElement(By.xpath("//i[@class='fa-solid fa-user']"));
-        accountIcon.click();
-
-        WebElement registerBtn = driver.findElement(By.xpath("//a[@class='dropdown-item'][normalize-space()='Register']"));
-        registerBtn.click();
 
         String firstName = DataFakerManager.getRandomName();
-        System.out.println("The generated first name is " + firstName);
 
         String lastName = DataFakerManager.getRandomName();
-        System.out.println("The generated last name is " + lastName);
 
         String email = DataFakerManager.getRandomEmail();
-        System.out.println("The generated email is " + email);
 
         String password = DataFakerManager.getRandomPassword(14, 20);
-        System.out.println("The generated password is " + password);
 
-        WebElement firstNameInput = driver.findElement(By.id("input-firstname"));
-        firstNameInput.sendKeys(firstName);
+        RegisterPage registerPage = new RegisterPage(driver);
+        registerPage.fillInTheRegisterForm(firstName, lastName, email, password);
+        registerPage.switchOnThePrivacyToggle(driver);
+        registerPage.clickOnContinueButton();
+        Thread.sleep(2000);
+        System.out.println(driver.getCurrentUrl());
 
-        WebElement lastNameInput = driver.findElement(By.id("input-lastname"));
-        lastNameInput.sendKeys(lastName);
+        AccountCreatedPage accountCreatedPage = new AccountCreatedPage(driver);
+        accountCreatedPage.logOutFromTheAccount();
+        ;
+        Thread.sleep(2000);
+        System.out.println(driver.getCurrentUrl());
 
-        WebElement emailInput = driver.findElement(By.id("input-email"));
-        emailInput.sendKeys(email);
-
-        WebElement passwordInput = driver.findElement(By.id("input-password"));
-        passwordInput.sendKeys(password);
-
-
-        Thread.sleep(500);
-        WebElement privacyToggleBox = driver.findElement(By.xpath("//input[@name='agree']"));
-        ScrollManager.scrollToElement(driver, privacyToggleBox);
-        privacyToggleBox.click();
-
-        WebElement continueButton = driver.findElement(By.xpath("//button[normalize-space()='Continue']"));
-        continueButton.click();
-
-
-        Thread.sleep(5000);
+        Thread.sleep(3000);
 
 
         driver.close();
-
-        driver.switchTo().window(currentWindowName);
-        Thread.sleep(5000);
-
-        driver.get("https://andreisecuqa.host/");
-
 
         driver.quit();
 
