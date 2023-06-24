@@ -1,4 +1,4 @@
-package com.opencart.Managers;
+package com.opencart.managers;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
@@ -50,5 +50,13 @@ public class DriverManager {
             DriverManager.getInstance();
         }
         return driver;
+    }
+
+    public void quitTheDriver() {
+        driver.quit();
+        driver = null;
+        instance = null;
+        System.out.println("The driver is quit and the instance is reset!");
+
     }
 }
