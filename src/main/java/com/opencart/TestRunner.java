@@ -1,14 +1,11 @@
 package com.opencart;
 
-import com.opencart.Managers.DataFakerManager;
-import com.opencart.Managers.DriverManager;
-import com.opencart.Managers.ScrollManager;
-import com.opencart.Pageobjects.AccountCreatedPage;
-import com.opencart.Pageobjects.HomePage;
-import com.opencart.Pageobjects.RegisterPage;
-import io.github.bonigarcia.wdm.WebDriverManager;
+import com.opencart.managers.DataFakerManager;
+import com.opencart.managers.DriverManager;
+import com.opencart.pageobjects.AccountCreatedPage;
+import com.opencart.pageobjects.HomePage;
+import com.opencart.pageobjects.RegisterPage;
 import org.openqa.selenium.*;
-import org.openqa.selenium.chrome.ChromeDriver;
 
 // Press Shift twice to open the Search Everywhere dialog and type `show whitespaces`,
 // then press Enter. You can now see whitespace characters in your code.

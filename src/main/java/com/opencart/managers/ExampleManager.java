@@ -1,4 +1,4 @@
-package com.opencart.Managers;
+package com.opencart.managers;
 
 public class ExampleManager {
 }
