@@ -17,7 +17,11 @@ public class HomePageSteps {
     }
 
     @And("RegisterPage is accessed from HomePage menu")
+
     public void registerpageIsAccessedFromHomePageMenu() {
+        homePage.navigateToRegisterPageFromHeaderMenu();
+
 
     }
+
 }
