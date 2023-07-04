@@ -7,7 +7,7 @@ Feature: Login Feature Tests Suite
     And the following data is entered into the login form:
       | <email>    |
       | <password> |
-    When loginButton is clicked
+    When "loginButton" from "LoginPage" is clicked
     Then the following error messages are displayed:
       | Warning: No match for E-Mail Address and/or Password. |
     Examples:
@@ -22,7 +22,7 @@ Feature: Login Feature Tests Suite
     And the following data is entered into the login form:
       | <email>    |
       | <password> |
-    When loginButton is clicked
+    When "loginButton" from "LoginPage" is clicked
     Then the current url contains the following keyword: "account"
     Examples:
       | attribute | email            | password    |

@@ -8,7 +8,7 @@ import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
 public class DriverManager {
-    private static String webDriverType = "Chrome";
+    private static String webDriverType = ConfigReaderManager.getProperty("browserType");
     private static DriverManager instance;
     private WebDriver driver;
 
@@ -16,7 +16,10 @@ public class DriverManager {
         switch (webDriverType.toUpperCase()) {
             case "CHROME":
                 ChromeOptions options = new ChromeOptions();
-                options.addArguments("--incognito");
+                if (ConfigReaderManager.getProperty("isIncognitoChromeEnabled").equals("true")) {
+                    options.addArguments("--incognito");
+                }
+
                 driver = new ChromeDriver(options);
                 System.out.println("The Chrome Driver was initiated!");
                 break;
